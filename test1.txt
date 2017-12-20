@@ -1,0 +1,44 @@
+		lw		0	1	n		//load n
+		lw		0	2	r		//load r
+		lw		0	5	stack	//load stack
+		lw		0	6	combi	//load combination address and 
+		jalr		6	7		
+		halt				//stop program
+		beq		2	0	if	//r==0 do if
+		beq		1	2	if	//n==r do if
+else		lw		0	6	pos1
+		add		5	6	5	//stack+1
+		sw		5	1	stack	//store n at stack-3
+		add		5	6	5	//stack+1
+		sw		5	2	stack	//store r at stack-2
+		add		5	6	5	//stack+1
+		sw		5	7	stack	//store return address at stack-1
+		add		5	6	5	//stack+1
+		lw		0	6	neg1	
+		add		1	6	1	//n-1
+		lw		0	6	combi	
+		jalr		6	7	
+		sw		5	3	stack	//store value from 
+		lw		0	6	neg1
+		add		2	6	2	//r-1
+		lw		0	6	combi	
+		jalr		6	7
+		lw		5	6	stack	//
+		add		3	6	3
+		lw		0	6	neg1
+		add 		6	5	5	//stack-1	
+		lw		5	7	stack
+		add 		6	5	5		
+		lw		5	2	stack
+		add 		6	5	5		//load r at stack-2
+		lw		5	1	stack
+		add 		6	5	5		//load n at stack-3
+		jalr		7	6
+if		lw		0	3	pos1
+		jalr		7	6
+n	.fill		5
+r	.fill		3
+combi  	.fill   6
+pos1	.fill	1
+neg1	.fill	-1
+stack	.fill	0
